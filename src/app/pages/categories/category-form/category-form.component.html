@@ -44,11 +44,9 @@
       <div class="form-group col-md-8">
         <label for="description">Descrição</label>
         <input type="text" class="form-control" id="description" formControlName="description">
-        <div class="text-danger">
-          <div *ngIf="categoryForm.get('description').invalid && categoryForm.get('description').touched">
+        <div class="text-danger" *ngIf="categoryForm.get('description').invalid && categoryForm.get('description').touched">
             <div *ngIf="categoryForm.get('description').errors.required">dado obrigatório</div>
-            <div *ngIf="categoryForm.get('description').errors.minlength">eve ter no minimo 5 caracteres</div>
-          </div>
+            <div *ngIf="categoryForm.get('description').errors.minlength">deve ter no minimo 5 caracteres</div>
         </div>
       </div>
     </div>
