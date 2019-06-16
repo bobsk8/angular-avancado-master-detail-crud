@@ -70,11 +70,11 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
       this.route.paramMap.pipe(
         switchMap(params => this.categoryService.getById(+params.get('id')))
       )
-      .subscribe(c => {
-        this.category = c;
-        this.categoryForm.patchValue(c); // bind loaded category data to CategoryForm
-      },
-      error => alert('Ocorreu um erro no servidor, tente mais tarde'))
+        .subscribe(c => {
+          this.category = c;
+          this.categoryForm.patchValue(c); // bind loaded category data to CategoryForm
+        },
+          error => alert('Ocorreu um erro no servidor, tente mais tarde'));
     }
   }
 
@@ -91,27 +91,27 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     const category = Object.assign(new Category(), this.categoryForm.value);
 
     this.categoryService.create(category)
-    .subscribe(c =>
-      this.actionsForSuccess(c),
-      error => this.actionsForError(error)
-    );
+      .subscribe(c =>
+        this.actionsForSuccess(c),
+        error => this.actionsForError(error)
+      );
   }
 
   private updateCategory() {
     const category = Object.assign(new Category(), this.categoryForm.value);
 
     this.categoryService.update(category)
-    .subscribe(
-      category => this.actionsForSuccess(category),
-      error => this.actionsForError(error)
-    )
+      .subscribe(
+        c => this.actionsForSuccess(c),
+        error => this.actionsForError(error)
+      );
   }
 
   private actionsForSuccess(category: Category) {
     toastr.success('Solicitação processada com sucesso!');
 
-    this.router.navigateByUrl('categories',{ skipLocationChange: true }).then(
-      () => this.router.navigate(['categories', category.id,'edit'])
+    this.router.navigateByUrl('categories', { skipLocationChange: true }).then(
+      () => this.router.navigate(['categories', category.id, 'edit'])
     );
   }
 
@@ -123,7 +123,7 @@ export class CategoryFormComponent implements OnInit, AfterContentChecked {
     if (error.status === 422) {
       this.serverErrorMessages = JSON.parse(error._body).errors;
     } else {
-      this.serverErrorMessages = ['Falha na comunicação com o servidor. Por favor, tente mais tarde']
+      this.serverErrorMessages = ['Falha na comunicação com o servidor. Por favor, tente mais tarde'];
     }
   }
 }
